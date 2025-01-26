@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <p>If you still stuck. <a id="site" href="#here">Click Here</a></p>
+    <script>
+        // Mapping of special dates to their JSON files
+        const DayMap = {
+            "01-01": "url/day/new-year.json",
+        };
+
+        // Regular sites fallback
+        const defaultsite = "url/default.json";
+
+        // Function to get current date string
+        function curr_date() {
+            const today = new Date();
+            return `${today.getMonth() + 1}`.padStart(2, '0') + 
+                   `-${today.getDate()}`.padStart(2, '0');
+        }
+
+        // Function to load JSON from file
+        async function load(filename) {
+            try {
+                const response = await fetch(filename);
+                const data = await response.json();
+                return data.sites;
+            } catch (error) {
+                console.error('Error loading sites:', error);
+                return [];
+            }
+        }
+
+        // Randomly select and redirect to a site
+        async function randomRedirect() {
+            const today = curr_date();
+            let filename = DayMap[today] || defaultsite;
+            const url = document.getElementById('site');
+            const c = Math.floor(Math.random() * 11);
+
+            if (c === 10) {
+                filename = "url/anime/enstar/fine.json";
+            }
+            
+            const list = await load(filename);
+            
+            if (list.length > 0) {
+                const x = Math.floor(Math.random() * list.length);
+                url.href = list[x];
+                window.location.href = list[x];
+            } else {
+                console.error('No sites available at the moment.');
+            }
+        }
+
+        // Redirect immediately when page loads
+        randomRedirect();
+    </script>
+</body>
+</html>
