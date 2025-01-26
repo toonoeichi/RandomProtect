@@ -39,6 +39,11 @@
             let filename = DayMap[today] || defaultsite;
             const url = document.getElementById('site');
             const c = Math.floor(Math.random() * 11);
+            const sd = Math.floor(Math.random() * 2);
+
+            if (filename == DayMap[today] && sd === 2) {
+                filename = defaultsite;
+            }
 
             if (c === 10) {
                 filename = "url/anime/enstar/fine.json";
