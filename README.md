@@ -32,6 +32,19 @@ You can either
 ```
 rp.aoeyoei.xyz
 ```
+Like this Caddyfile
+```Caddyfile
+:80 {
+        redir "https://rp.aoeyoei.xyz" 302
+}
+
+* {
+        redir "https://rp.aoeyoei.xyz" 302
+        tls {
+                on_demand
+        }
+}
+```
 - Self-hosted on your server and point default to there.
 - Deploy on Github , Vercel , or other as your choice, and point your server , reverse proxy to it.
 
@@ -39,7 +52,7 @@ and so much more...
 
 <br>
 
-and you can try it by visiting [rp.aoeyoei.xyz](rp.aoeyoei.xyz)!
+and you can try it by visiting [rp.aoeyoei.xyz](https://rp.aoeyoei.xyz)!
 
 <hr>
 
